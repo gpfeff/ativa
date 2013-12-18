@@ -1,14 +1,34 @@
 class Notifier < ActionMailer::Base
-  default from: "from@example.com"
+  default from: "practicestella@gmail.com"
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
   #
   #   en.notifier.subscription_confirmation.subject
   #
-  def subscription_confirmation
+ 
+  def subscription_confirmation(user, project)
+    @user = user
+    @project = project
     @greeting = "Hi"
 
-    mail to: "to@example.org"
+  # Change the 'to:' section to your partner's name and email
+  mail( to: "#{user.name} <#{user.email}>",
+        subject: "Subscribed to #{project.name.capitalize} | Ativa")
+  
   end
+
+def unsubscribe(user, project)
+    @user = user
+    @project = project
+    @greeting = "Hi"
+
+  # Change the 'to:' section to your partner's name and email
+  mail( to: "#{user.name} <#{user.email}>",
+        subject: "Unsubscribe to #{project.name.capitalize} | Ativa")
+  
+  end
+
+
+
 end
