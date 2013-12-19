@@ -15,9 +15,11 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-
+    @project = Project.find(params[:project_id])
     respond_to do |format|
       if @post.save
+        Notifier.new_post(current_user, @project).deliver
+
         format.html { redirect_to project_path(@post.project_id, phase_id: @post.phase_id), notice: 'Post was successfully created.' }
         format.json { render action: 'show', status: :created, location: @post }
       else

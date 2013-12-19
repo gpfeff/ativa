@@ -26,8 +26,16 @@ def unsubscribe(user, project)
   # Change the 'to:' section to your partner's name and email
   mail( to: "#{user.name} <#{user.email}>",
         subject: "Unsubscribe to #{project.name.capitalize} | Ativa")
-  
   end
+
+def new_post(user, project)
+  @user = user
+  @project = project
+
+  mail( to: "#{user.name} <#{user.email}>",
+        subject: "New Post to #{project.name.capitalize} | Ativa")
+  end
+
 
 
 
